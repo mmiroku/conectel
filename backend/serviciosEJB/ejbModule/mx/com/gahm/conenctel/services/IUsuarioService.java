@@ -12,4 +12,10 @@ public interface IUsuarioService extends Serializable {
 	public List<Usuario> getAll();
 	
 	public Usuario login(String user, String password);
+	
+	public Usuario save(Usuario user);
+	
+	public Usuario update(Usuario user);
+	
+	public boolean delete(List<Long> ids);
 }

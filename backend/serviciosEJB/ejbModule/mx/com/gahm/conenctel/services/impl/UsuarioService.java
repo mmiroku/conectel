@@ -77,5 +77,23 @@ public class UsuarioService implements IUsuarioService {
 		}
 		return userLogged;
 	}
+
+	@Override
+	public Usuario save(Usuario user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Usuario update(Usuario user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean delete(List<Long> ids) {
+		// TODO Auto-generated method stub
+		return false;
+	}
     
 }
