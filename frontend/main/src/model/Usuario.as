@@ -1,7 +1,8 @@
 package model
 {
 	import mx.collections.ArrayCollection;
-
+	
+	[RemoteClass(alias="mx.com.gahm.conenctel.model.Usuario")]
 	public class Usuario
 	{
 		public var usuario:String;
