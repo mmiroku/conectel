@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <services-config>
+	<factories>
+		<factory id="ejb3" class="de._3m5.blazeds.ejb3factory.EJB3Factory" />
+	</factories>
 
     <services>
         <service-include file-path="remoting-config.xml" />

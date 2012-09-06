@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%"
+		 label="Consulta"
+		 horizontalAlign="right">
+	<mx:DataGrid id="datagrid" width="100%" height="100%">
+		<mx:columns>
+			<mx:DataGridColumn id="dtgClient" headerText="Cliente"/>
+			<mx:DataGridColumn id="dtgProjectType" headerText="{'Tipo de\nProyecto'}"/>
+			<mx:DataGridColumn id="dtgTechnology" headerText="Tecnología"/>
+			<mx:DataGridColumn id="dtgEquipment" headerText="Equipo"/>
+			<mx:DataGridColumn id="dtgActivity" headerText="{'Actividad\na Realizar'}" width="180"/>
+			<mx:DataGridColumn id="dtgModel" headerText="Modelo"/>
+			<mx:DataGridColumn id="dtgServiceDescription" headerText="{'Descripción\ndel Servicio'}"/>
+			<mx:DataGridColumn id="dtgServiceType" headerText="{'Tipo de\nServicio'}"/>
+			<mx:DataGridColumn id="dtgCost" headerText="Costo"/>
+		</mx:columns>
+	</mx:DataGrid>
+	<mx:HBox>
+		<mx:Button label="Eliminar"/>
+		<mx:Button label="Exportar"/>
+		<mx:Button label="Importar"/>
+	</mx:HBox>
+</mx:VBox>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:components="components.*"
+		 creationComplete="creationCompleteHandler(event)">
+	<mx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			private var mode:String = null;
+			
+			public function set registrer(value:Boolean):void{
+				this.label = "Registrar";
+			}
+			
+			public function set detail(value:Boolean):void{
+				mode = "detail";
+				this.label = "Detalle";
+			}
+			
+			public function set update(value:Boolean):void{
+				this.label = "Modificar";
+			}
+			
+			public function set enabledComponents(value:Boolean):void{
+				this.txtClient.enabled = value;
+				this.txtProjectType.enabled = value;
+				this.txtTechnology.enabled = value;
+				this.txtEquipment.enabled = value;
+				this.txtActivity.enabled = value;
+				this.txtModel.enabled = value;
+				this.txtServiceDescription.enabled = value;
+				this.txtServiceType.enabled = value;
+				this.txtCost.enabled = value;				
+			}
+			
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				switch( mode ){
+					case "detail":
+						this.enabledComponents = false;
+					break;
+				}
+			}
+			
+		]]>
+	</mx:Script>
+	<mx:Form>
+		<mx:FormItem label="Cliente:">
+			<components:TextInput id="txtClient" width="400"/>
+		</mx:FormItem>
+		<mx:FormItem label="Tipo de Proyecto:">
+			<components:TextInput id="txtProjectType" width="300"/>
+		</mx:FormItem>
+		<mx:FormItem label="Tecnología:">
+			<components:TextInput id="txtTechnology" width="250"/>
+		</mx:FormItem>
+		<mx:FormItem label="Equipo:">
+			<components:TextInput id="txtEquipment" width="300"/>
+		</mx:FormItem>
+		<mx:FormItem label="Actividad a Realizar:">
+			<components:TextInput id="txtActivity" width="500"/>
+		</mx:FormItem>
+		<mx:FormItem label="Modelo:">
+			<components:TextInput id="txtModel" width="250"/>
+		</mx:FormItem>
+		<mx:FormItem label="Descripción del Servicio:">
+			<components:TextInput id="txtServiceDescription" width="500"/>
+		</mx:FormItem>
+		<mx:FormItem label="Tipo de Servicio:">
+			<components:TextInput id="txtServiceType" width="250"/>
+		</mx:FormItem>
+		<mx:FormItem label="Costo:">
+			<components:TextInput id="txtCost" width="150" textAlign="right"/>
+		</mx:FormItem>
+		<mx:FormItem>
+			<mx:Button id="btnAccept" label="Aceptar"/>
+		</mx:FormItem>
+	</mx:Form>
+</mx:VBox>

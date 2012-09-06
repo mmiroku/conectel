@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" 
+		   width="650" height="600" 
+		   xmlns:components="components.*" 
+		   verticalAlign="middle" horizontalAlign="center"
+		   creationComplete="creationCompleteHandler(event)">
+	<mx:Script>
+		<![CDATA[
+			import events.GenericEvent;
+			
+			import model.Constants;
+			import model.Usuario;
+			import model.Util;
+			
+			import mx.collections.ArrayCollection;
+			import mx.com.gahm.componentes.validadores.Constantes;
+			import mx.com.gahm.componentes.validadores.InicializaValidadoresEtiquetas;
+			import mx.com.gahm.componentes.validadores.ValidadorRequerido;
+			import mx.controls.Alert;
+			import mx.core.Application;
+			import mx.events.FlexEvent;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			import mx.utils.StringUtil;
+			
+			public var validators:InicializaValidadoresEtiquetas = null;
+			
+			protected function enterButton_clickHandler(event:Event):void
+			{
+				var user:String = StringUtil.trim( this.txtUser.text );
+				var password:String = StringUtil.trim( this.txtPassword.text );
+				
+				if( user == "" || password == "" ){
+					Alert.show(Constants.REQUIRED_FIELD, Constants.ERROR );
+					return;
+				}
+				
+				this.responseLogin.token = this.usuarioService.login(user, password);
+			}
+			
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				this.initializeValidators();
+			}
+			
+			private function initializeValidators():void{
+				this.validators = new InicializaValidadoresEtiquetas();
+				this.validators.crearValidadorRestrictor("required", ValidadorRequerido.nombre );
+				this.validators.setValidador( this.txtUser, "required" );
+				this.validators.setValidador( this.txtPassword, "required" );
+			}
+			
+			protected function usuarioService_faultHandler(event:FaultEvent):void
+			{
+				Util.showErrorMessage(event.fault.faultString);
+			}
+			
+			protected function responseLogin_resultHandler(event:ResultEvent):void
+			{
+				var user:Usuario = event.result as Usuario;
+				if( user == null ){
+					Util.showErrorMessage("Usuario ó Contraseña inválidos");
+					return;
+				}
+				var genericEvent:GenericEvent = new GenericEvent("validUser");
+				genericEvent.information = user; 
+				this.dispatchEvent( genericEvent );
+			}
+		]]>
+	</mx:Script>
+	<mx:Metadata>
+		[Event(name="validUser", type="events.GenericEvent")]
+	</mx:Metadata>
+	<!--<mx:SWFLoader source="assets/blimp_ticker_flash9.swf"/>-->
+	<mx:Panel title="Autenticación" styleName="panelStyle"
+			  paddingBottom="2" paddingTop="2">
+		<mx:Form borderStyle="none" width="100%" height="100%" 
+				 backgroundImage="assets/images/candado.jpeg"
+				 backgroundAlpha="0.5">
+			<mx:FormItem required="true" label="Usuario:">
+				<components:TextInput id="txtUser"/>
+			</mx:FormItem>
+			<mx:FormItem required="true" label="Contraseña:">
+				<components:TextInput id="txtPassword" displayAsPassword="true"
+									  enter="enterButton_clickHandler(event)"/>
+			</mx:FormItem>
+			<mx:FormItem>
+				<mx:Button label="Entrar" id="enterButton" click="enterButton_clickHandler(event)"/>
+			</mx:FormItem>
+		</mx:Form>
+	</mx:Panel>
+	<mx:RemoteObject id="usuarioService" destination="usuarioService" fault="usuarioService_faultHandler(event)"/>
+	<mx:CallResponder id="responseLogin" result="responseLogin_resultHandler(event)"/>
+</mx:Module>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:components="components.*"
+		 creationComplete="creationCompleteHandler(event)">
+	<mx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			private var mode:String = null;
+			
+			public function set registrer(value:Boolean):void{
+				this.label = "Registrar";
+			}
+			
+			public function set detail(value:Boolean):void{
+				mode = "detail";
+				this.label = "Detalle";
+			}
+			
+			public function set update(value:Boolean):void{
+				this.label = "Modificar";
+			}
+			
+			public function set enabledComponents(value:Boolean):void{
+				this.txtWholeName.enabled = value;
+				this.cmbProfile.enabled = value;
+				this.txtUser.enabled = value;
+				this.txtPasword.enabled = value;
+				this.txtVerifyPassword.enabled = value;
+				this.chbActive.enabled = value;
+			}
+			
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				switch( mode ){
+					case "detail":
+						this.enabledComponents = false;
+					break;
+				}
+			}
+			
+		]]>
+	</mx:Script>
+	<mx:Form id="form">
+		<mx:FormHeading label="Datos Generales"/>
+		<mx:FormItem label="Nombre Completo:">
+			<components:TextInput id="txtWholeName" width="400"/>
+		</mx:FormItem>
+		<mx:FormItem label="Perfil:">
+			<mx:ComboBox id="cmbProfile" width="300"
+						 />
+		</mx:FormItem>
+		<mx:FormItem label="Usuario:">
+			<components:TextInput id="txtUser" width="200"/>
+		</mx:FormItem>
+		<mx:FormItem label="Contraseña:">
+			<components:TextInput id="txtPasword" width="150"
+								  displayAsPassword="true"/>
+		</mx:FormItem>
+		<mx:FormItem label="Confirmar Contraseña:">
+			<components:TextInput id="txtVerifyPassword" width="150"
+								  displayAsPassword="true"/>
+		</mx:FormItem>
+		<mx:FormItem label="Activo:">
+			<mx:CheckBox id="chbActive"/>
+		</mx:FormItem>
+		<mx:FormItem>
+			<mx:Button id="btnAccept" label="Aceptar"/>
+		</mx:FormItem>
+	</mx:Form>
+</mx:VBox>

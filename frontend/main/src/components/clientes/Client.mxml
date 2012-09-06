@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:components="components.*"
+		 creationComplete="creationCompleteHandler(event)">
+	<mx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			private var mode:String = null;
+			
+			public function set registrer(value:Boolean):void{
+				this.label = "Registrar";
+			}
+			
+			public function set detail(value:Boolean):void{
+				mode = "detail";
+				this.label = "Detalle";
+			}
+			
+			public function set update(value:Boolean):void{
+				this.label = "Modificar";
+			}
+			
+			public function set enabledComponents(value:Boolean):void{
+				this.txtComercialName.enabled = value;
+				this.txtLegalName.enabled = value;
+				this.txtRFC.enabled = value;
+				this.txtFiscalName.enabled = value;
+				this.txtWholeName.enabled = value;
+				this.txtEmail.enabled = value;
+				this.txtPhone.enabled = value;
+				this.txtWebPage.enabled = value;
+				this.txtLocality.enabled = value;
+				this.txtState.enabled = value;
+				this.txtComercialConditions.enabled = value;
+				this.txtVendorNumber.enabled = value;
+				this.txtAccountExecutive.enabled = value;
+			}
+			
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				switch( mode ){
+					case "detail":
+						this.enabledComponents = false;
+					break;
+				}
+			}
+			
+		]]>
+	</mx:Script>
+	<mx:Form id="form">
+		<mx:FormHeading label="Datos Generales"/>
+		<mx:FormItem label="Nombre Comercial:">
+			<components:TextInput id="txtComercialName" width="400"/>
+		</mx:FormItem>
+		<mx:FormItem label="Razón Social:">
+			<components:TextInput id="txtLegalName" width="400"/>
+		</mx:FormItem>
+		<mx:FormItem label="R.F.C.:">
+			<components:TextInput id="txtRFC" width="120"/>
+		</mx:FormItem>
+		<mx:FormItem label="Domicilio Fiscal:">
+			<components:TextInput id="txtFiscalName" width="400"/>
+		</mx:FormItem>
+		<mx:FormHeading label="Datos de Contacto"/>
+		<mx:FormItem label="Nombre Completo:">
+			<components:TextInput id="txtWholeName" width="400"/>
+		</mx:FormItem>
+		<mx:FormItem label="Correo Electrónico:">
+			<components:TextInput id="txtEmail" width="300"/>
+		</mx:FormItem>
+		<mx:FormItem label="Teléfono:">
+			<components:TextInput id="txtPhone" width="120"/>
+		</mx:FormItem>
+		<mx:FormItem label="Página Web:">
+			<components:TextInput id="txtWebPage" width="300"/>
+		</mx:FormItem>
+		<mx:FormItem label="Localidad:">
+			<components:TextInput id="txtLocality" width="250"/>
+		</mx:FormItem>
+		<mx:FormItem label="Estado:">
+			<components:TextInput id="txtState" width="250"/>
+		</mx:FormItem>
+		<mx:FormHeading label="Datos Comerciales"/>
+		<mx:FormItem label="Condiciones Comerciales:">
+			<components:TextArea id="txtComercialConditions" width="600" height="70"/>
+		</mx:FormItem>
+		<mx:FormItem label="No. de Vendor:">
+			<components:TextInput id="txtVendorNumber" width="120"/>
+		</mx:FormItem>
+		<mx:FormItem label="Ejecutivo de Cuenta:">
+			<components:TextInput id="txtAccountExecutive" width="400"/>
+		</mx:FormItem>
+		<mx:FormItem>
+			<mx:Button id="btnAccept" label="Aceptar"/>
+		</mx:FormItem>
+	</mx:Form>
+</mx:VBox>

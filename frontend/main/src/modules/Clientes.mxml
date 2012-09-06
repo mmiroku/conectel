@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" 
+		   width="810" height="400" 
+		   xmlns:clientes="components.clientes.*">
+	<mx:TabNavigator width="100%" height="100%">
+		<clientes:Consult id="consult"/>
+		<clientes:Client id="detail" detail="true"/>
+		<clientes:Client id="register" registrer="true"/>
+		<clientes:Client id="update" update="true"/>
+	</mx:TabNavigator>
+</mx:Module>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+				xmlns:components="components.*"
+				minWidth="800" minHeight="600" currentState="login"
+				creationComplete="creationCompleteHandler(event)">
+	<mx:Script>
+		<![CDATA[
+			import events.GenericEvent;
+			
+			import model.MenuOption;
+			import model.Usuario;
+			
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			import mx.events.ModuleEvent;
+			
+			protected function login_readyHandler(event:ModuleEvent):void
+			{
+				this.loaderLogin.child.addEventListener("validUser",validUser);
+			}
+			
+			protected function validUser(event:GenericEvent):void
+			{
+				this.currentState = "";
+				var user:Usuario = event.information as Usuario;
+				this.header.user = user;
+			}
+			
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				//this.validUser(null);
+			}
+			
+			protected function menuItemClickHandler(event:GenericEvent):void
+			{
+				var menuOption:MenuOption = event.information as MenuOption;
+				workSpace.menuOption = menuOption;
+			}
+			
+		]]>
+	</mx:Script>
+	<mx:Style source="assets/css/styles.css"/>
+	<mx:states>
+		<mx:State name="login">
+			<mx:RemoveChild target="{header}"/>
+			<mx:RemoveChild target="{menu}"/>
+			<mx:RemoveChild target="{body}"/>
+			<mx:AddChild position="lastChild">
+				<mx:ModuleLoader id="loaderLogin" url="modules/Login.swf" ready="login_readyHandler(event)"/>
+			</mx:AddChild>
+		</mx:State>
+	</mx:states>
+	<components:Header id="header"/>
+	<mx:HBox id="body" width="100%" height="100%"
+			 verticalAlign="middle" horizontalAlign="center">
+		<mx:HBox verticalAlign="top">
+			<mx:Panel id="menu" title="Menú Principal">
+				<components:Menu menuItemClick="menuItemClickHandler(event)"/>
+			</mx:Panel>
+			<components:WorkSpace id="workSpace"/>
+		</mx:HBox>
+	</mx:HBox>
+</mx:Application>

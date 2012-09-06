@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%"
+		 label="Consulta"
+		 horizontalAlign="right">
+	<mx:DataGrid id="datagrid" width="100%" height="100%">
+		<mx:columns>
+			<mx:DataGridColumn id="dtgComercialName" headerText="Nombre Comercial"/>
+			<mx:DataGridColumn id="dtgLegalName" headerText="Razón Social"/>
+			<mx:DataGridColumn id="dtgRFC" headerText="R.F.C."/>
+			<mx:DataGridColumn id="dtgFiscalAddress" headerText="Domicilio Fiscal"/>
+		</mx:columns>
+	</mx:DataGrid>
+	<mx:HBox>
+		<mx:Button label="Exportar"/>
+		<mx:Button label="Eliminar"/>
+	</mx:HBox>
+</mx:VBox>

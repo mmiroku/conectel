@@ -10,4 +10,20 @@
         <channel ref="my-amf"/>
     </default-channels>
 
+	<destination id="fooBean">
+		<properties>
+			<factory>ejb3</factory>
+			<source>ejb/FooService</source>
+			<scope>session</scope>
+		</properties>
+	</destination>
+	
+	<destination id="usuarioService">
+		<properties>
+			<factory>ejb3</factory>
+			<source>ejb/UsuarioService</source>
+			<scope>session</scope>
+		</properties>
+	</destination>
+
 </service>
